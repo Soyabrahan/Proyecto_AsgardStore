@@ -45,7 +45,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.145 0 0);
+  --background: #171221;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -76,10 +76,18 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --card-bg: #3a2e5a;
+  --card-border: #3a2e5a;
+  --card-title: #fff;
+  --card-title-hover: #7847eb;
+  --card-paragraph: #a394c7;
+  --card-paragraph-hover: #fff;
+  --asgard-purple: #7847eb;
+  --asgard-purple-hover: rgba(120, 71, 235, 0.9);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: #171221;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -118,5 +126,100 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+/* Hardware acceleration for animations */
+.animate-spin,
+.animate-pulse,
+.animate-bounce {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize transforms */
+[class*="hover:scale-"],
+[class*="hover:rotate-"],
+[class*="group-hover:scale-"] {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Reduce animations on mobile */
+@media (max-width: 768px) {
+  .animate-pulse {
+    animation-duration: 2s;
+  }
+
+  .animate-bounce {
+    animation-duration: 1.5s;
+  }
+
+  /* Disable complex animations on mobile */
+  .mobile-reduce-motion {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-spin,
+  .animate-pulse,
+  .animate-bounce {
+    animation: none;
+  }
+}
+
+/* Optimize repaints */
+.card-hover {
+  contain: layout style paint;
+  transform: translateZ(0);
+}
+
+/* Smooth scrolling optimization */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* GPU acceleration for gradients */
+.bg-gradient-to-r,
+.bg-gradient-to-br,
+.bg-gradient-to-b {
+  transform: translateZ(0);
+}
+
+/* Optimize text rendering */
+body {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Container queries for better performance */
+@container (max-width: 768px) {
+  .container-responsive {
+    animation-duration: 0.3s;
   }
 }

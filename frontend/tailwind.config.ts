@@ -10,14 +10,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Colores personalizados de Asgard Store
-        "asgard-dark": "hsl(var(--asgard-dark))",
-        "asgard-purple": "hsl(var(--asgard-purple))",
-        "asgard-light-purple": "hsl(var(--asgard-light-purple))",
-        "asgard-accent": "hsl(var(--asgard-accent))",
-        "asgard-light": "hsl(var(--asgard-light))",
-
-        // Shadcn/UI mapped colors - using hsl() for raw HSL CSS variables
+        // COLORES PERSONALIZADOS ASGARD STORE
+        card: "var(--card-bg)",
+        "card-border": "var(--card-border)",
+        "card-title": "var(--card-title)",
+        "card-title-hover": "var(--card-title-hover)",
+        "card-paragraph": "var(--card-paragraph)",
+        "card-paragraph-hover": "var(--card-paragraph-hover)",
+        "asgard-purple": "var(--asgard-purple)",
+        "asgard-purple-hover": "var(--asgard-purple-hover)",
         border: "var(--color-border)",
         input: "var(--color-input)",
         ring: "var(--color-ring)",
@@ -46,10 +47,6 @@ const config: Config = {
         popover: {
           DEFAULT: "var(--color-popover)",
           foreground: "var(--color-popover-foreground)",
-        },
-        card: {
-          DEFAULT: "var(--color-card)",
-          foreground: "var(--color-card-foreground)",
         },
       },
       backgroundImage: {

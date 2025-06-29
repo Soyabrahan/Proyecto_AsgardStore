@@ -222,7 +222,7 @@ export default function AsgardStore() {
               />
               <Input
                 placeholder="Buscar"
-                className={`pl-10 bg-asgard-purple border-asgard-purple text-white placeholder:text-asgard-light-purple w-64 ${
+                className={`pl-10 bg-asgard-purple border-asgard-purple text-white placeholder:text-card-paragraph focus:border-asgard-purple focus:ring-asgard-purple/20 ${
                   prefersReducedMotion
                     ? ""
                     : "transition-all duration-300 focus:border-asgard-accent focus:ring-2 focus:ring-asgard-accent/20"
@@ -230,8 +230,7 @@ export default function AsgardStore() {
               />
             </div>
             <Button
-              variant="outline"
-              className={`border-asgard-accent text-asgard-accent hover:bg-asgard-accent hover:text-white bg-transparent ${
+              className={`border-asgard-purple text-asgard-purple bg-transparent hover:bg-asgard-purple hover:text-white ${
                 prefersReducedMotion
                   ? ""
                   : isMobile
@@ -406,7 +405,7 @@ export default function AsgardStore() {
                     Geek
                   </p>
                   <Button
-                    className={`bg-asgard-accent hover:bg-asgard-accent/90 text-white px-8 py-3 text-lg relative overflow-hidden group ${
+                    className={`bg-asgard-purple hover:bg-asgard-purple-hover text-white hover:shadow-[0_4px_24px_0_rgba(120,71,235,0.5)] px-8 py-3 text-lg relative overflow-hidden group ${
                       prefersReducedMotion
                         ? ""
                         : isMobile
@@ -463,7 +462,7 @@ export default function AsgardStore() {
             ].map((collection, index) => (
               <Card
                 key={index}
-                className={`bg-asgard-purple border-asgard-purple overflow-hidden group cursor-pointer ${animationClasses.card(
+                className={`bg-card border-card-border overflow-hidden group cursor-pointer ${animationClasses.card(
                   index,
                   visibleCards.includes(index)
                 )} ${animationClasses.hover}`}
@@ -508,19 +507,19 @@ export default function AsgardStore() {
                   </div>
                   <div className="p-6">
                     <h3
-                      className={`text-xl font-bold mb-2 ${
+                      className={`text-card-title ${
                         prefersReducedMotion
                           ? ""
-                          : "group-hover:text-asgard-accent transition-colors duration-300"
+                          : "group-hover:text-card-title-hover transition-colors duration-300"
                       }`}
                     >
                       {collection.title}
                     </h3>
                     <p
-                      className={`text-asgard-light-purple text-sm ${
+                      className={`text-card-paragraph ${
                         prefersReducedMotion
                           ? ""
-                          : "group-hover:text-white transition-colors duration-300"
+                          : "group-hover:text-card-paragraph-hover transition-colors duration-300"
                       }`}
                     >
                       {collection.description}
@@ -568,7 +567,7 @@ export default function AsgardStore() {
             ].map((product, index) => (
               <Card
                 key={index}
-                className={`bg-asgard-purple border-asgard-purple overflow-hidden group cursor-pointer ${animationClasses.card(
+                className={`bg-card border-card-border overflow-hidden group cursor-pointer ${animationClasses.card(
                   index,
                   isLoaded
                 )} ${animationClasses.hover}`}
@@ -648,16 +647,16 @@ export default function AsgardStore() {
                       className={`font-bold mb-1 ${
                         prefersReducedMotion
                           ? ""
-                          : "group-hover:text-asgard-accent transition-colors duration-300"
+                          : "group-hover:text-card-title transition-colors duration-300"
                       }`}
                     >
                       {product.title}
                     </h3>
                     <p
-                      className={`text-asgard-light-purple text-sm ${
+                      className={`text-card-paragraph ${
                         prefersReducedMotion
                           ? ""
-                          : "group-hover:text-white transition-colors duration-300"
+                          : "group-hover:text-card-paragraph-hover transition-colors duration-300"
                       }`}
                     >
                       {product.description}
@@ -683,14 +682,14 @@ export default function AsgardStore() {
             Únete a la Comunidad AsgardStore
           </h2>
           <p
-            className={`text-asgard-light-purple text-lg mb-8 ${
+            className={`text-card-paragraph text-lg mb-8 ${
               prefersReducedMotion ? "" : "animate-pulse"
             }`}
           >
             Estate Atento a Diseños Nuevos
           </p>
           <Button
-            className={`bg-asgard-accent hover:bg-asgard-accent/90 text-white px-8 py-3 text-lg relative overflow-hidden group ${
+            className={`bg-asgard-purple hover:bg-asgard-purple-hover text-white hover:shadow-[0_4px_24px_0_rgba(120,71,235,0.5)] px-8 py-3 text-lg relative overflow-hidden group ${
               prefersReducedMotion
                 ? ""
                 : isMobile
@@ -724,7 +723,7 @@ export default function AsgardStore() {
                 <a
                   key={link}
                   href="#"
-                  className={`text-asgard-light-purple hover:text-white relative group ${
+                  className={`text-card-paragraph ${
                     prefersReducedMotion ? "" : "transition-all duration-300"
                   }`}
                 >
@@ -756,7 +755,7 @@ export default function AsgardStore() {
             </div>
           </div>
           <div
-            className={`text-center text-asgard-light-purple text-sm ${
+            className={`text-center text-card-paragraph text-sm ${
               prefersReducedMotion ? "" : "animate-pulse"
             }`}
           >
@@ -775,7 +774,7 @@ export default function AsgardStore() {
               }`}
             ></div>
             <p
-              className={`text-asgard-light-purple ${
+              className={`text-card-paragraph ${
                 prefersReducedMotion ? "" : "animate-pulse"
               }`}
             >

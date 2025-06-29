@@ -19,12 +19,42 @@ import {
   StaggerContainer,
   useScrollAnimation,
 } from "./animations";
+import { useEffect, useState } from "react";
 
 export function AsgardDashboard() {
   const { ref: heroRef, isInView: heroInView } = useInView({
     triggerOnce: true,
   });
   const scrollAnimation = useScrollAnimation();
+  const [isMobile, setIsMobile] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  // Detect mobile and reduced motion preferences
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    const checkReducedMotion = () => {
+      setPrefersReducedMotion(
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      );
+    };
+
+    checkMobile();
+    checkReducedMotion();
+
+    const handleResize = () => checkMobile();
+    window.addEventListener("resize", handleResize);
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    mediaQuery.addEventListener("change", checkReducedMotion);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      mediaQuery.removeEventListener("change", checkReducedMotion);
+    };
+  }, []);
 
   const stats = [
     {
@@ -87,22 +117,28 @@ export function AsgardDashboard() {
   return (
     <div className="min-h-screen bg-background p-6">
       {/* Header */}
-      <AnimatedDiv variant="fadeInDown" className="mb-8">
-        <div className="flex items-center justify-between">
+      <AnimatedDiv
+        variant="fadeInDown"
+        className={`mb-8 ${isMobile ? "mobile-reduce-motion" : ""}`}
+      >
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">
+            <h1 className="text-2xl md:text-3xl font-bold text-foreground">
               Dashboard AsgardStore
             </h1>
             <p className="text-muted-foreground">
               Bienvenido de vuelta, administrador
             </p>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input placeholder="Buscar productos..." className="pl-10 w-64" />
+              <Input
+                placeholder="Buscar productos..."
+                className="pl-10 w-full sm:w-64"
+              />
             </div>
-            <Button>
+            <Button className="w-full sm:w-auto">
               <ShoppingCart className="w-4 h-4 mr-2" />
               Ver Carrito
             </Button>
@@ -111,25 +147,31 @@ export function AsgardDashboard() {
       </AnimatedDiv>
 
       {/* Stats Grid */}
-      <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
         {stats.map((stat, index) => (
-          <AnimatedDiv key={stat.title} delay={index * 0.1}>
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
+          <AnimatedDiv
+            key={stat.title}
+            delay={prefersReducedMotion ? 0 : index * 0.1}
+            className={isMobile ? "mobile-reduce-motion" : ""}
+          >
+            <Card className="card-hover hover:shadow-lg transition-shadow group">
+              <CardContent className="p-4 md:p-6 text-card-paragraph group-hover:text-card-paragraph-hover">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">
+                    <p className="text-xs md:text-sm font-medium text-muted-foreground">
                       {stat.title}
                     </p>
-                    <p className="text-2xl font-bold text-foreground">
+                    <p className="text-xl md:text-2xl font-bold text-foreground">
                       {stat.value}
                     </p>
-                    <Badge variant="secondary" className="mt-2">
+                    <Badge variant="secondary" className="mt-2 text-xs">
                       {stat.change}
                     </Badge>
                   </div>
-                  <div className={`p-3 rounded-full bg-muted ${stat.color}`}>
-                    <stat.icon className="w-6 h-6" />
+                  <div
+                    className={`p-2 md:p-3 rounded-full bg-muted ${stat.color}`}
+                  >
+                    <stat.icon className="w-4 h-4 md:w-6 md:h-6" />
                   </div>
                 </div>
               </CardContent>
@@ -139,7 +181,14 @@ export function AsgardDashboard() {
       </StaggerContainer>
 
       {/* Recent Products */}
-      <AnimatedDiv {...scrollAnimation} className="mb-8">
+      <AnimatedDiv
+        {...scrollAnimation}
+        className="mb-8"
+        style={{
+          willChange: prefersReducedMotion ? "auto" : "transform, opacity",
+          contain: "layout style paint",
+        }}
+      >
         <Card>
           <CardHeader>
             <CardTitle>Productos Recientes</CardTitle>
@@ -149,29 +198,33 @@ export function AsgardDashboard() {
               {recentProducts.map((product) => (
                 <motion.div
                   key={product.id}
-                  className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
+                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors card-hover group"
+                  whileHover={prefersReducedMotion ? {} : { x: 5 }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
+                  style={{
+                    willChange: prefersReducedMotion ? "auto" : "transform",
+                    contain: "layout style paint",
+                  }}
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center">
-                      <Package className="w-6 h-6 text-primary-foreground" />
+                  <div className="flex items-center space-x-4 mb-2 sm:mb-0">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center">
+                      <Package className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-foreground">
+                      <h3 className="font-medium text-foreground text-sm md:text-base">
                         {product.name}
                       </h3>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs md:text-sm text-muted-foreground">
                         {product.category}
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center justify-between sm:space-x-4">
                     <div className="text-right">
-                      <p className="font-medium text-foreground">
+                      <p className="font-medium text-foreground text-sm md:text-base">
                         {product.price}
                       </p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                         {product.sales} ventas
                       </p>
                     </div>
@@ -181,6 +234,7 @@ export function AsgardDashboard() {
                           ? "default"
                           : "destructive"
                       }
+                      className="text-xs"
                     >
                       {product.status}
                     </Badge>
@@ -195,57 +249,63 @@ export function AsgardDashboard() {
       {/* Quick Actions */}
       <AnimatedDiv
         {...scrollAnimation}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
+        style={{
+          willChange: prefersReducedMotion ? "auto" : "transform, opacity",
+          contain: "layout style paint",
+        }}
       >
-        <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-          <CardContent className="p-6">
+        <Card className="card-hover hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+          <CardContent className="p-4 md:p-6">
             <div className="text-center">
-              <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Package className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Package className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">
+              <h3 className="font-semibold text-foreground mb-2 text-sm md:text-base">
                 Agregar Producto
               </h3>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-xs md:text-sm text-muted-foreground mb-4">
                 Añade nuevos productos a tu catálogo
               </p>
-              <Button className="w-full">Crear Producto</Button>
+              <Button className="w-full text-sm bg-asgard-purple hover:bg-asgard-purple-hover text-white hover:shadow-[0_4px_24px_0_rgba(120,71,235,0.5)]">
+                Crear Producto
+              </Button>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-          <CardContent className="p-6">
+        <Card className="card-hover hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+          <CardContent className="p-4 md:p-6">
             <div className="text-center">
-              <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">
+              <h3 className="font-semibold text-foreground mb-2 text-sm md:text-base">
                 Ver Reportes
               </h3>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-xs md:text-sm text-muted-foreground mb-4">
                 Analiza el rendimiento de tu tienda
               </p>
-              <Button variant="outline" className="w-full">
+              <Button className="w-full text-sm bg-asgard-purple hover:bg-asgard-purple-hover text-white hover:shadow-[0_4px_24px_0_rgba(120,71,235,0.5)]">
                 Ver Reportes
               </Button>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-          <CardContent className="p-6">
+        <Card className="card-hover hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
+          <CardContent className="p-4 md:p-6">
             <div className="text-center">
-              <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
-              <h3 className="font-semibold text-foreground mb-2">
+              <h3 className="font-semibold text-foreground mb-2 text-sm md:text-base">
                 Gestionar Clientes
               </h3>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-xs md:text-sm text-muted-foreground mb-4">
                 Administra tu base de clientes
               </p>
-              <Button variant="outline" className="w-full">
+              <Button className="w-full text-sm bg-asgard-purple hover:bg-asgard-purple-hover text-white hover:shadow-[0_4px_24px_0_rgba(120,71,235,0.5)]">
                 Ver Clientes
               </Button>
             </div>
