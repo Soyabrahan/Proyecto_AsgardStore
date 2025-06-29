@@ -14,7 +14,7 @@ from sklearn.ensemble import RandomForestRegressor
 import json
 import uuid
 
-from models.trend_models import (
+from ..models.trend_models import (
     TrendAnalysisRequest, 
     TrendAnalysisResponse, 
     TrendData, 

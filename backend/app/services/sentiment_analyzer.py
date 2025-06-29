@@ -16,7 +16,7 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 import uuid
 
-from models.trend_models import SentimentAnalysis, SentimentScore
+from ..models.trend_models import SentimentAnalysis, SentimentScore
 
 logger = logging.getLogger(__name__)
 

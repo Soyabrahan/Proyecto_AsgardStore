@@ -12,7 +12,7 @@ from typing import List, Optional, Dict, Any
 import logging
 
 # Importar modelos y servicios
-from models.trend_models import (
+from .models.trend_models import (
     TrendAnalysisRequest, 
     TrendAnalysisResponse,
     ProductRecommendation,
@@ -20,10 +20,10 @@ from models.trend_models import (
     SalesMetrics,
     SentimentAnalysis
 )
-from services.trend_analyzer import TrendAnalyzer
-from services.sentiment_analyzer import SentimentAnalyzer
-from services.prediction_engine import PredictionEngine
-from services.recommendation_system import RecommendationSystem
+from .services.trend_analyzer import TrendAnalyzer
+from .services.sentiment_analyzer import SentimentAnalyzer
+from .services.prediction_engine import PredictionEngine
+from .services.recommendation_system import RecommendationSystem
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO)
