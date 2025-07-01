@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,13 +14,28 @@ import {
   Package,
   Star,
 } from "lucide-react";
-import { useInView } from "@/hooks/useInView";
+import { useInView } from "../hooks/useInView";
 import {
   AnimatedDiv,
   StaggerContainer,
   useScrollAnimation,
 } from "./animations";
 import { useEffect, useState } from "react";
+
+interface AnimatedDivProps extends React.ComponentProps<typeof motion.div> {
+  children: React.ReactNode;
+  variant?:
+    | "fadeInUp"
+    | "fadeInDown"
+    | "fadeInLeft"
+    | "fadeInRight"
+    | "scaleIn";
+  delay?: number;
+}
+
+interface StaggerContainerProps extends React.ComponentProps<typeof motion.div> {
+  children: React.ReactNode;
+}
 
 export function AsgardDashboard() {
   const { ref: heroRef, isInView: heroInView } = useInView({
@@ -90,27 +106,73 @@ export function AsgardDashboard() {
   const recentProducts = [
     {
       id: 1,
-      name: "Circuit Board Tee",
-      category: "Camisetas",
-      price: "$29.99",
+      name: "Collar Espada Zelda TOTK",
+      category: "Accesorios",
+      description: "Collar inspirado en la Espada Maestra de Zelda: Tears of the Kingdom. Ideal para fans de la saga.",
+      price: "$15.99",
       status: "En Stock",
-      sales: 45,
+      sales: 12,
+      image: "/productos/collar espada Zelda TOTK.jpg",
     },
     {
       id: 2,
-      name: "Glitch Art Hoodie",
-      category: "Sudaderas",
-      price: "$49.99",
-      status: "Agotado",
-      sales: 23,
+      name: "Billetera R2-D2",
+      category: "Accesorios",
+      description: "Billetera temática de R2-D2, perfecta para los amantes de Star Wars y la cultura geek.",
+      price: "$19.99",
+      status: "En Stock",
+      sales: 8,
+      image: "/productos/billetera R2-D2.jpg",
     },
     {
       id: 3,
-      name: "Neon Grid Leggings",
-      category: "Pantalones",
+      name: "Gorra Venom",
+      category: "Gorras",
+      description: "Gorra negra con diseño de Venom, cómoda y con mucho estilo para los fans de Marvel.",
+      price: "$14.99",
+      status: "En Stock",
+      sales: 20,
+      image: "/productos/gorra venom.jpg",
+    },
+    {
+      id: 4,
+      name: "Medias Matrix",
+      category: "Ropa",
+      description: "Medias con diseño inspirado en Matrix, ideales para quienes buscan un toque geek en su vestimenta.",
+      price: "$7.99",
+      status: "En Stock",
+      sales: 15,
+      image: "/productos/medias Matrix.jpg",
+    },
+    {
+      id: 5,
+      name: "Suéter Armadura Medieval",
+      category: "Ropa",
+      description: "Suéter con estampado de armadura medieval, perfecto para destacar en cualquier ocasión.",
+      price: "$29.99",
+      status: "En Stock",
+      sales: 5,
+      image: "/productos/sueter armadura medieval.jpeg",
+    },
+    {
+      id: 6,
+      name: "Franela Retro 8bits",
+      category: "Camisetas",
+      description: "Franela con diseño retro de 8 bits, un clásico para los nostálgicos de los videojuegos.",
+      price: "$12.99",
+      status: "En Stock",
+      sales: 18,
+      image: "/productos/franela Retro 8bits.jpg",
+    },
+    {
+      id: 7,
+      name: "Chaqueta Cyberpunk",
+      category: "Chaquetas",
+      description: "Chaqueta con estilo cyberpunk, moderna y llamativa para quienes buscan un look futurista.",
       price: "$39.99",
       status: "En Stock",
-      sales: 67,
+      sales: 7,
+      image: "/productos/chaqueta Cyberpunk.jpg",
     },
   ];
 
@@ -147,7 +209,7 @@ export function AsgardDashboard() {
       </AnimatedDiv>
 
       {/* Stats Grid */}
-      <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+      <StaggerContainer className={"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8"}>
         {stats.map((stat, index) => (
           <AnimatedDiv
             key={stat.title}
@@ -181,8 +243,11 @@ export function AsgardDashboard() {
       </StaggerContainer>
 
       {/* Recent Products */}
-      <AnimatedDiv
-        {...scrollAnimation}
+      <motion.div
+        variants={scrollAnimation.variants}
+        initial={scrollAnimation.initial}
+        whileInView={scrollAnimation.whileInView}
+        viewport={scrollAnimation.viewport}
         className="mb-8"
         style={{
           willChange: prefersReducedMotion ? "auto" : "transform, opacity",
@@ -200,22 +265,27 @@ export function AsgardDashboard() {
                   key={product.id}
                   className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors card-hover group"
                   whileHover={prefersReducedMotion ? {} : { x: 5 }}
-                  transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
+                  transition={{ duration: prefersReducedMotion ? 0 : 0.2, ease: [0.42, 0, 0.58, 1] }}
                   style={{
                     willChange: prefersReducedMotion ? "auto" : "transform",
                     contain: "layout style paint",
                   }}
                 >
                   <div className="flex items-center space-x-4 mb-2 sm:mb-0">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center">
-                      <Package className="w-5 h-5 md:w-6 md:h-6 text-primary-foreground" />
-                    </div>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-10 h-10 md:w-12 md:h-12 rounded-lg object-cover"
+                    />
                     <div>
                       <h3 className="font-medium text-foreground text-sm md:text-base">
                         {product.name}
                       </h3>
                       <p className="text-xs md:text-sm text-muted-foreground">
                         {product.category}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {product.description}
                       </p>
                     </div>
                   </div>
@@ -244,11 +314,14 @@ export function AsgardDashboard() {
             </div>
           </CardContent>
         </Card>
-      </AnimatedDiv>
+      </motion.div>
 
       {/* Quick Actions */}
-      <AnimatedDiv
-        {...scrollAnimation}
+      <motion.div
+        variants={scrollAnimation.variants}
+        initial={scrollAnimation.initial}
+        whileInView={scrollAnimation.whileInView}
+        viewport={scrollAnimation.viewport}
         className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
         style={{
           willChange: prefersReducedMotion ? "auto" : "transform, opacity",
@@ -311,7 +384,7 @@ export function AsgardDashboard() {
             </div>
           </CardContent>
         </Card>
-      </AnimatedDiv>
+      </motion.div>
     </div>
   );
 }
