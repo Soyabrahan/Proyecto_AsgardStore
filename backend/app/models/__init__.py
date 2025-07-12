@@ -1,1 +1,0 @@
-# Modelos de datos para el sistema de análisis predictivo 

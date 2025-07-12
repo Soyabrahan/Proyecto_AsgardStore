@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { useEffect, useState, useMemo } from "react"
+import PredictiveTrends from "@/components/PredictiveTrends"
 
 export default function AsgardStore() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -513,6 +514,29 @@ export default function AsgardStore() {
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             )}
           </Button>
+        </div>
+      </section>
+
+      {/* Predictive Trends Section */}
+      <section className="px-6 py-16 bg-[#1a1a2e]" data-animate id="predictive-trends">
+        <div className="max-w-7xl mx-auto">
+          <div className={`text-center mb-12 ${animationClasses.hero}`}>
+            <h2
+              className={`text-4xl font-bold mb-4 ${
+                prefersReducedMotion
+                  ? "text-white"
+                  : "bg-gradient-to-r from-white via-[#7847eb] to-cyan-400 bg-clip-text text-transparent animate-pulse"
+              }`}
+            >
+              Análisis Predictivo de Tendencias
+            </h2>
+            <p className={`text-[#a394c7] text-lg ${prefersReducedMotion ? "" : "animate-pulse"}`}>
+              Descubre las tendencias futuras con nuestro modelo de machine learning
+            </p>
+          </div>
+          <div className={`${animationClasses.hero}`}>
+            <PredictiveTrends />
+          </div>
         </div>
       </section>
 
