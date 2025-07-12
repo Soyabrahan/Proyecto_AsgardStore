@@ -1,156 +1,167 @@
-"use client"
-
-import { Search } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
-import { useEffect, useState } from "react"
-import PredictiveTrends from "@/components/PredictiveTrends"
-
-export default function AsgardStore() {
-  const [isLoaded, setIsLoaded] = useState(false)
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoaded(true)
-    }, 100)
-
-    return () => clearTimeout(timer)
-  }, [])
-
+export default function Home() {
   return (
-    <div className="min-h-screen bg-[#171221] text-white">
-      {/* Header */}
-      <header className="border-b border-[#2e2447] px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-8">
-            <div className="flex items-center space-x-2">
-              <div
-                className="w-6 h-6 bg-white"
-                style={{
-                  clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)",
-                }}
-              />
-              <span className="text-xl font-bold">
-                ASGARD STORE
-              </span>
-            </div>
-            <nav className="hidden md:flex space-x-6">
-              {["Novedades", "Hombres", "Mujeres", "Accesorios"].map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="text-[#a394c7] hover:text-white"
-                >
-                  {item}
-                </a>
-              ))}
-            </nav>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#a394c7] w-4 h-4" />
-              <Input
-                placeholder="Buscar"
-                className="pl-10 bg-[#2e2447] border-[#2e2447] text-white placeholder:text-[#a394c7] w-64"
-              />
-            </div>
-            <Button className="border-[#7847eb] text-[#7847eb] hover:bg-[#7847eb] hover:text-white bg-transparent border">
-              Iniciar Sesión
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      <section className="px-6 py-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative rounded-2xl overflow-hidden">
-            <div className="w-full h-[400px] bg-gradient-to-r from-teal-900 via-teal-700 to-cyan-600 flex items-center justify-center">
-              <div className="text-center">
-                <h1 className="text-5xl font-bold mb-4">
-                  Bienvenido a Asgard Store
-                </h1>
-                <p className="text-xl text-cyan-200 mb-8">
-                  Descubre las últimas tendencias en moda
-                </p>
-                <Button className="bg-[#7847eb] hover:bg-[#7847eb]/90 text-white px-8 py-3 text-lg">
-                  Explorar Colección
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Products Section */}
-      <section className="px-6 py-16">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-8 text-center">Productos Destacados</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                title: "Circuit Board Tee",
-                description: "A stylish tee featuring a circuit board design.",
-                gradient: "from-green-600 to-green-800",
-              },
-              {
-                title: "Glitch Art Hoodie",
-                description: "A comfortable hoodie with a glitch art pattern.",
-                gradient: "from-blue-800 to-blue-900",
-              },
-              {
-                title: "Neon Grid Leggings",
-                description: "Eye-catching leggings with a neon grid design.",
-                gradient: "from-purple-600 to-pink-600",
-              },
-              {
-                title: "Binary Code Scarf",
-                description: "A unique scarf with a binary code pattern.",
-                gradient: "from-gray-700 to-gray-900",
-              },
-            ].map((product, index) => (
-              <Card key={index} className="bg-[#2e2447] border-[#2e2447] overflow-hidden">
-                <CardContent className="p-0">
-                  <div className={`h-64 bg-gradient-to-br ${product.gradient} flex items-center justify-center`}>
-                    <div className="text-center">
-                      <div className="text-4xl mb-2">👕</div>
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-bold mb-1">{product.title}</h3>
-                    <p className="text-[#a394c7] text-sm">{product.description}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Predictive Trends Section */}
-      <section className="px-6 py-16 bg-[#1a1a2e]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">
-              Análisis Predictivo de Tendencias
-            </h2>
-            <p className="text-[#a394c7] text-lg">
-              Descubre las tendencias futuras con nuestro modelo de machine learning
+    <html lang="es">
+      <head>
+        <title>Asgard Store</title>
+        <meta name="description" content="Tienda de ropa Asgard Store" />
+      </head>
+      <body style={{ 
+        margin: 0, 
+        padding: 0, 
+        fontFamily: 'Arial, sans-serif',
+        backgroundColor: '#1a1a1a',
+        color: 'white'
+      }}>
+        <div style={{ 
+          minHeight: '100vh',
+          padding: '20px'
+        }}>
+          {/* Header */}
+          <header style={{ 
+            textAlign: 'center', 
+            marginBottom: '40px',
+            padding: '20px',
+            backgroundColor: '#2a2a2a',
+            borderRadius: '10px'
+          }}>
+            <h1 style={{ 
+              fontSize: '3rem', 
+              margin: '0 0 10px 0',
+              color: '#00ff88'
+            }}>
+              ASGARD STORE
+            </h1>
+            <p style={{ 
+              fontSize: '1.2rem', 
+              margin: 0,
+              color: '#cccccc'
+            }}>
+              Bienvenido a nuestra tienda de ropa
             </p>
-          </div>
-          <PredictiveTrends />
-        </div>
-      </section>
+          </header>
 
-      {/* Footer */}
-      <footer className="border-t border-[#2e2447] px-6 py-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center text-[#a394c7] text-sm">
-            © 2024 Asgard Store. Todos los Derechos Reservados.
-          </div>
+          {/* Main Content */}
+          <main>
+            {/* Products Section */}
+            <section style={{ marginBottom: '40px' }}>
+              <h2 style={{ 
+                textAlign: 'center', 
+                fontSize: '2rem',
+                marginBottom: '30px',
+                color: '#00ff88'
+              }}>
+                Productos Destacados
+              </h2>
+              
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                gap: '20px',
+                maxWidth: '1200px',
+                margin: '0 auto'
+              }}>
+                {[
+                  { name: "Camiseta Cyberpunk", price: "$29.99", color: "#ff6b6b" },
+                  { name: "Hoodie Retro", price: "$39.99", color: "#4ecdc4" },
+                  { name: "Pantalones Tech", price: "$49.99", color: "#45b7d1" },
+                  { name: "Zapatos Futuristas", price: "$59.99", color: "#96ceb4" }
+                ].map((product, index) => (
+                  <div key={index} style={{
+                    backgroundColor: '#2a2a2a',
+                    padding: '20px',
+                    borderRadius: '10px',
+                    border: `2px solid ${product.color}`,
+                    textAlign: 'center'
+                  }}>
+                    <h3 style={{ 
+                      fontSize: '1.3rem',
+                      margin: '0 0 10px 0',
+                      color: product.color
+                    }}>
+                      {product.name}
+                    </h3>
+                    <p style={{ 
+                      fontSize: '1.5rem',
+                      fontWeight: 'bold',
+                      margin: 0,
+                      color: '#00ff88'
+                    }}>
+                      {product.price}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Analytics Section */}
+            <section style={{ 
+              textAlign: 'center',
+              backgroundColor: '#2a2a2a',
+              padding: '30px',
+              borderRadius: '10px'
+            }}>
+              <h2 style={{ 
+                fontSize: '2rem',
+                marginBottom: '20px',
+                color: '#00ff88'
+              }}>
+                Análisis Predictivo
+              </h2>
+              
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                gap: '20px',
+                maxWidth: '800px',
+                margin: '0 auto'
+              }}>
+                <div style={{
+                  backgroundColor: '#ff6b6b',
+                  padding: '20px',
+                  borderRadius: '8px'
+                }}>
+                  <h3 style={{ margin: '0 0 10px 0' }}>Tendencia 1</h3>
+                  <p style={{ fontSize: '1.2rem', margin: 0 }}>+15% crecimiento</p>
+                </div>
+                
+                <div style={{
+                  backgroundColor: '#4ecdc4',
+                  padding: '20px',
+                  borderRadius: '8px'
+                }}>
+                  <h3 style={{ margin: '0 0 10px 0' }}>Tendencia 2</h3>
+                  <p style={{ fontSize: '1.2rem', margin: 0 }}>+22% crecimiento</p>
+                </div>
+                
+                <div style={{
+                  backgroundColor: '#45b7d1',
+                  padding: '20px',
+                  borderRadius: '8px'
+                }}>
+                  <h3 style={{ margin: '0 0 10px 0' }}>Tendencia 3</h3>
+                  <p style={{ fontSize: '1.2rem', margin: 0 }}>+8% crecimiento</p>
+                </div>
+              </div>
+            </section>
+          </main>
+
+          {/* Footer */}
+          <footer style={{ 
+            textAlign: 'center',
+            marginTop: '40px',
+            padding: '20px',
+            backgroundColor: '#2a2a2a',
+            borderRadius: '10px'
+          }}>
+            <p style={{ 
+              margin: 0,
+              color: '#cccccc'
+            }}>
+              © 2024 Asgard Store. Todos los derechos reservados.
+            </p>
+          </footer>
         </div>
-      </footer>
-    </div>
+      </body>
+    </html>
   )
 }
