@@ -168,8 +168,7 @@ export default function AsgardStore() {
               />
             </div>
             <Button
-              variant="outline"
-              className={`border-[#7847eb] text-[#7847eb] hover:bg-[#7847eb] hover:text-white bg-transparent ${
+              className={`border-[#7847eb] text-[#7847eb] hover:bg-[#7847eb] hover:text-white bg-transparent border ${
                 prefersReducedMotion
                   ? ""
                   : isMobile
