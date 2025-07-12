@@ -96,3 +96,7 @@ body {
     animation-duration: 0.3s;
   }
 }
+
+.asgard-gold {
+  filter: brightness(1.1) sepia(1) saturate(5) hue-rotate(10deg) drop-shadow(0 0 6px #FFD700) !important;
+}

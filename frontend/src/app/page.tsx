@@ -442,14 +442,14 @@ export default function AsgardStore() {
                 title: "Colección Cyberpunk",
                 description:
                   "Abraza el futuro con nuestra Colección Cyberpunk. Diseños atrevidos para los amantes de la tecnología.",
-                gradient: "from-gray-800 to-gray-900",
+                image: "/productos/chaqueta Cyberpunk.jpg",
                 accent: "from-blue-500 to-purple-600",
               },
               {
-                title: "Pixelado Retro",
+                title: "Colección Zelda",
                 description:
-                  "Adéntrate en el pasado con nuestra colección Retro Pixelado. Estilos nostálgicos para los entusiastas de los juegos.",
-                gradient: "from-orange-400 to-red-500",
+                  "Luce el legendario collar inspirado en la Espada Maestra de Zelda: Tears of the Kingdom. Un accesorio imprescindible para los verdaderos fans de la saga.",
+                image: "/productos/collar espada Zelda TOTK.jpg",
                 accent: "bg-white",
               },
               {
@@ -475,32 +475,38 @@ export default function AsgardStore() {
               >
                 <CardContent className="p-0">
                   <div
-                    className={`relative h-64 bg-gradient-to-br ${collection.gradient} flex items-center justify-center overflow-hidden`}
+                    className={
+                      `relative h-64 flex items-center justify-center overflow-hidden` +
+                      (collection.image ? " bg-cover bg-center" : " bg-gradient-to-br " + collection.gradient)
+                    }
+                    style={
+                      collection.image
+                        ? { backgroundImage: `url('${collection.image}')` }
+                        : {}
+                    }
                   >
-                    <div
-                      className={`w-32 h-32 bg-gradient-to-r ${
-                        collection.accent
-                      } rounded-lg opacity-80 ${
-                        prefersReducedMotion
-                          ? ""
-                          : "transition-all duration-500 group-hover:scale-110"
-                      }`}
-                      style={{
-                        willChange: prefersReducedMotion ? "auto" : "transform",
-                      }}
-                    >
-                      {index === 1 && (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <div
-                            className={`text-2xl font-bold text-gray-800 ${
-                              prefersReducedMotion ? "" : "animate-bounce"
-                            }`}
-                          >
-                            👕
+                    {!collection.image && (
+                      <div
+                        className={`w-32 h-32 bg-gradient-to-r ${collection.accent} rounded-lg opacity-80 ${
+                          prefersReducedMotion
+                            ? ""
+                            : "transition-all duration-500 group-hover:scale-110"
+                        }`}
+                        style={{
+                          willChange: prefersReducedMotion ? "auto" : "transform",
+                        }}
+                      >
+                        {index === 1 && collection.image && (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <img
+                              src={collection.image}
+                              alt="Collar Zelda"
+                              className="object-contain w-20 h-20"
+                            />
                           </div>
-                        </div>
-                      )}
-                    </div>
+                        )}
+                      </div>
+                    )}
                     {!prefersReducedMotion && (
                       <div className="absolute inset-0 bg-asgard-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     )}
