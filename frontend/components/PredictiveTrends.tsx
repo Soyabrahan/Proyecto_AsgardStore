@@ -30,6 +30,7 @@ interface ApiResponse {
     predictions: Prediction[];
     modelInfo: ModelInfo;
   };
+  note?: string;
 }
 
 export default function PredictiveTrends() {
@@ -201,6 +202,18 @@ export default function PredictiveTrends() {
               </pre>
             </CardContent>
           </Card>
+
+          {/* Nota sobre datos simulados */}
+          {data.note && (
+            <Card className="border-blue-500/30 bg-blue-900/10">
+              <CardContent className="pt-6">
+                <div className="flex items-center space-x-2 text-blue-300">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <p className="text-sm">{data.note}</p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </CardContent>
       </Card>
     </div>
