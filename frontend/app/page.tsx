@@ -483,25 +483,25 @@ export default function AsgardStore() {
                 title: "Franela Retro 8bits",
                 description:
                   "Revive la nostalgia de los videojuegos clásicos con esta franela de estilo retro 8bits.",
-                gradient: "from-pink-400 to-yellow-400",
+                image: "/productos/franela Retro 8bits.jpg",
               },
               {
                 title: "Gorra Venom",
                 description:
                   "Demuestra tu lado más audaz con la gorra inspirada en Venom. Ideal para los fans de los cómics.",
-                gradient: "from-black to-purple-900",
+                image: "/productos/gorra venom.jpg",
               },
               {
                 title: "Medias Matrix",
                 description:
                   "Sumérgete en el código con estas medias inspiradas en Matrix. Perfectas para los amantes de la ciencia ficción.",
-                gradient: "from-green-700 to-black",
+                image: "/productos/medias Matrix.jpg",
               },
               {
                 title: "Suéter Armadura Medieval",
                 description:
                   "Luce como un verdadero caballero con este suéter de armadura medieval. Para los fans de la fantasía épica.",
-                gradient: "from-gray-500 to-gray-900",
+                image: "/productos/sueter armadura medieval.jpeg",
               },
             ].map((product, index) => (
               <Card
@@ -517,7 +517,13 @@ export default function AsgardStore() {
                 }}
               >
                 <CardContent className="p-0">
-                  <div className={`relative h-64 bg-gradient-to-br ${product.gradient} flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:scale-110`}>
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    />
                     {!prefersReducedMotion && (
                       <div className="absolute inset-0 bg-[#7847eb]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     )}
@@ -558,81 +564,81 @@ export default function AsgardStore() {
           <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[
               {
-                name: "Camiseta Cyberpunk 2077",
-                price: "$29.99",
-                originalPrice: "$39.99",
-                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop&crop=center",
-                category: "Camisetas",
+                name: "Chaqueta Cyberpunk",
+                price: "$79.99",
+                originalPrice: "$89.99",
+                image: "/productos/chaqueta Cyberpunk.jpg",
+                category: "Chaquetas",
                 rating: 4.8,
                 reviews: 124,
                 badge: "Nuevo"
               },
               {
-                name: "Gorra Retro Gaming",
+                name: "Gorra Venom",
                 price: "$19.99",
                 originalPrice: "$24.99",
-                image: "https://images.unsplash.com/photo-1556306535-0d09baf2f3e6?w=400&h=400&fit=crop&crop=center",
+                image: "/productos/gorra venom.jpg",
                 category: "Gorras",
                 rating: 4.6,
                 reviews: 89,
                 badge: "Popular"
               },
               {
-                name: "Hoodie Matrix Code",
-                price: "$49.99",
-                originalPrice: "$59.99",
-                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop&crop=center",
-                category: "Hoodies",
+                name: "Franela Retro 8bits",
+                price: "$29.99",
+                originalPrice: "$39.99",
+                image: "/productos/franela Retro 8bits.jpg",
+                category: "Franelas",
                 rating: 4.9,
                 reviews: 203,
                 badge: "Oferta"
               },
               {
-                name: "Pantalones Cargo Tech",
-                price: "$39.99",
-                originalPrice: "$49.99",
-                image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop&crop=center",
-                category: "Pantalones",
+                name: "Suéter Armadura Medieval",
+                price: "$59.99",
+                originalPrice: "$69.99",
+                image: "/productos/sueter armadura medieval.jpeg",
+                category: "Suéteres",
                 rating: 4.7,
                 reviews: 156,
                 badge: "Nuevo"
               },
               {
-                name: "Camiseta Star Wars",
+                name: "Billetera R2-D2",
                 price: "$24.99",
                 originalPrice: "$29.99",
-                image: "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&h=400&fit=crop&crop=center",
-                category: "Camisetas",
+                image: "/productos/billetera R2-D2.jpg",
+                category: "Accesorios",
                 rating: 4.8,
                 reviews: 312,
                 badge: "Popular"
               },
               {
-                name: "Gorra Zelda Master",
+                name: "Collar Espada Zelda TOTK",
                 price: "$22.99",
                 originalPrice: "$27.99",
-                image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop&crop=center",
-                category: "Gorras",
+                image: "/productos/collar espada Zelda TOTK.jpg",
+                category: "Accesorios",
                 rating: 4.5,
                 reviews: 78,
                 badge: "Nuevo"
               },
               {
-                name: "Hoodie Marvel Avengers",
-                price: "$54.99",
-                originalPrice: "$64.99",
-                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop&crop=center",
-                category: "Hoodies",
+                name: "Medias Matrix",
+                price: "$14.99",
+                originalPrice: "$19.99",
+                image: "/productos/medias Matrix.jpg",
+                category: "Accesorios",
                 rating: 4.9,
                 reviews: 189,
                 badge: "Oferta"
               },
               {
-                name: "Pantalones Gaming",
-                price: "$44.99",
-                originalPrice: "$54.99",
-                image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop&crop=center",
-                category: "Pantalones",
+                name: "Gorra Retro Gaming",
+                price: "$19.99",
+                originalPrice: "$24.99",
+                image: "/productos/gorra venom.jpg",
+                category: "Gorras",
                 rating: 4.6,
                 reviews: 134,
                 badge: "Popular"
