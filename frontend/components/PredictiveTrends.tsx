@@ -66,14 +66,14 @@ export default function PredictiveTrends() {
 
   if (loading) {
     return (
-      <Card className="w-full">
+      <Card className="w-full bg-[#2e2447] border-[#2e2447] text-white">
         <CardHeader>
-          <CardTitle>Análisis Predictivo de Tendencias</CardTitle>
-          <CardDescription>Ejecutando análisis...</CardDescription>
+          <CardTitle className="text-white">Análisis Predictivo de Tendencias</CardTitle>
+          <CardDescription className="text-[#a394c7]">Ejecutando análisis...</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-center py-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#7847eb]"></div>
           </div>
         </CardContent>
       </Card>
@@ -82,14 +82,17 @@ export default function PredictiveTrends() {
 
   if (error) {
     return (
-      <Card className="w-full">
+      <Card className="w-full bg-[#2e2447] border-[#2e2447] text-white">
         <CardHeader>
-          <CardTitle>Análisis Predictivo de Tendencias</CardTitle>
-          <CardDescription>Error en el análisis</CardDescription>
+          <CardTitle className="text-white">Análisis Predictivo de Tendencias</CardTitle>
+          <CardDescription className="text-[#a394c7]">Error en el análisis</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="text-red-600 mb-4">{error}</div>
-          <Button onClick={fetchPredictiveData} className="border border-input bg-background hover:bg-accent hover:text-accent-foreground">
+          <div className="text-red-400 mb-4">{error}</div>
+          <Button 
+            onClick={fetchPredictiveData} 
+            className="bg-[#7847eb] hover:bg-[#7847eb]/90 text-white border-[#7847eb]"
+          >
             Reintentar
           </Button>
         </CardContent>
@@ -105,63 +108,66 @@ export default function PredictiveTrends() {
 
   return (
     <div className="space-y-6">
-      <Card className="w-full">
+      <Card className="w-full bg-[#2e2447] border-[#2e2447] text-white">
         <CardHeader>
-          <CardTitle className="flex items-center justify-between">
+          <CardTitle className="flex items-center justify-between text-white">
             Análisis Predictivo de Tendencias
-            <Button onClick={fetchPredictiveData} className="border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+            <Button 
+              onClick={fetchPredictiveData} 
+              className="bg-[#7847eb] hover:bg-[#7847eb]/90 text-white border-[#7847eb] h-9 rounded-md px-3"
+            >
               Actualizar
             </Button>
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-[#a394c7]">
             Modelo de regresión lineal para predecir tendencias futuras
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Resumen del modelo */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card>
+            <Card className="bg-[#1a1a2e] border-[#2e2447]">
               <CardContent className="pt-6">
-                <div className="text-2xl font-bold">{results.summary.dataPoints}</div>
-                <p className="text-xs text-muted-foreground">Puntos de datos</p>
+                <div className="text-2xl font-bold text-white">{results.summary.dataPoints}</div>
+                <p className="text-xs text-[#a394c7]">Puntos de datos</p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="bg-[#1a1a2e] border-[#2e2447]">
               <CardContent className="pt-6">
-                <div className="text-2xl font-bold">{results.summary.trainingSize}</div>
-                <p className="text-xs text-muted-foreground">Muestras de entrenamiento</p>
+                <div className="text-2xl font-bold text-white">{results.summary.trainingSize}</div>
+                <p className="text-xs text-[#a394c7]">Muestras de entrenamiento</p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="bg-[#1a1a2e] border-[#2e2447]">
               <CardContent className="pt-6">
-                <div className="text-2xl font-bold">{results.summary.testSize}</div>
-                <p className="text-xs text-muted-foreground">Muestras de prueba</p>
+                <div className="text-2xl font-bold text-white">{results.summary.testSize}</div>
+                <p className="text-xs text-[#a394c7]">Muestras de prueba</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Información del modelo */}
-          <Card>
+          <Card className="bg-[#1a1a2e] border-[#2e2447]">
             <CardHeader>
-              <CardTitle className="text-lg">Información del Modelo</CardTitle>
+              <CardTitle className="text-lg text-white">Información del Modelo</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <p className="text-sm font-medium">Pendiente (Coeficiente)</p>
-                  <p className="text-2xl font-bold text-blue-600">
+                  <p className="text-sm font-medium text-[#a394c7]">Pendiente (Coeficiente)</p>
+                  <p className="text-2xl font-bold text-cyan-400">
                     {results.modelInfo.slope?.toFixed(2) || 'N/A'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium">Intercepción</p>
-                  <p className="text-2xl font-bold text-green-600">
+                  <p className="text-sm font-medium text-[#a394c7]">Intercepción</p>
+                  <p className="text-2xl font-bold text-green-400">
                     {results.modelInfo.intercept?.toFixed(2) || 'N/A'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium">Error Cuadrático Medio (MSE)</p>
-                  <p className="text-2xl font-bold text-orange-600">
+                  <p className="text-sm font-medium text-[#a394c7]">Error Cuadrático Medio (MSE)</p>
+                  <p className="text-2xl font-bold text-orange-400">
                     {results.modelInfo.mse?.toFixed(2) || 'N/A'}
                   </p>
                 </div>
@@ -170,19 +176,19 @@ export default function PredictiveTrends() {
           </Card>
 
           {/* Predicciones futuras */}
-          <Card>
+          <Card className="bg-[#1a1a2e] border-[#2e2447]">
             <CardHeader>
-              <CardTitle className="text-lg">Predicciones Futuras</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-lg text-white">Predicciones Futuras</CardTitle>
+              <CardDescription className="text-[#a394c7]">
                 Valores predichos para los próximos 10 períodos
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 {results.predictions.map((prediction, index) => (
-                  <div key={index} className="text-center p-3 border rounded-lg">
-                    <div className="text-sm text-muted-foreground">Tiempo {prediction.time}</div>
-                    <div className="text-lg font-bold text-purple-600">
+                  <div key={index} className="text-center p-3 border border-[#2e2447] rounded-lg bg-[#171221]">
+                    <div className="text-sm text-[#a394c7]">Tiempo {prediction.time}</div>
+                    <div className="text-lg font-bold text-[#7847eb]">
                       {prediction.predictedValue.toFixed(1)}
                     </div>
                   </div>
@@ -192,12 +198,12 @@ export default function PredictiveTrends() {
           </Card>
 
           {/* Salida completa del script */}
-          <Card>
+          <Card className="bg-[#1a1a2e] border-[#2e2447]">
             <CardHeader>
-              <CardTitle className="text-lg">Salida Completa del Script</CardTitle>
+              <CardTitle className="text-lg text-white">Salida Completa del Script</CardTitle>
             </CardHeader>
             <CardContent>
-              <pre className="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto">
+              <pre className="bg-[#171221] p-4 rounded-lg text-sm overflow-x-auto text-[#a394c7] border border-[#2e2447]">
                 {data.output}
               </pre>
             </CardContent>
@@ -205,10 +211,10 @@ export default function PredictiveTrends() {
 
           {/* Nota sobre datos simulados */}
           {data.note && (
-            <Card className="border-blue-500/30 bg-blue-900/10">
+            <Card className="border-[#7847eb]/30 bg-[#7847eb]/10">
               <CardContent className="pt-6">
-                <div className="flex items-center space-x-2 text-blue-300">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                <div className="flex items-center space-x-2 text-[#7847eb]">
+                  <div className="w-2 h-2 bg-[#7847eb] rounded-full"></div>
                   <p className="text-sm">{data.note}</p>
                 </div>
               </CardContent>

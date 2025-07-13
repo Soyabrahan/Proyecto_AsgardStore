@@ -549,6 +549,218 @@ export default function AsgardStore() {
         </div>
       </section>
 
+      {/* Products Section - Real Products with Images */}
+      <section className="px-6 py-16" data-animate id="products">
+        <div className="max-w-7xl mx-auto">
+          <h2 className={`text-3xl font-bold mb-8 ${animationClasses.hero}`}>
+            Nuestros Productos
+          </h2>
+          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {[
+              {
+                name: "Camiseta Cyberpunk 2077",
+                price: "$29.99",
+                originalPrice: "$39.99",
+                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop&crop=center",
+                category: "Camisetas",
+                rating: 4.8,
+                reviews: 124,
+                badge: "Nuevo"
+              },
+              {
+                name: "Gorra Retro Gaming",
+                price: "$19.99",
+                originalPrice: "$24.99",
+                image: "https://images.unsplash.com/photo-1556306535-0d09baf2f3e6?w=400&h=400&fit=crop&crop=center",
+                category: "Gorras",
+                rating: 4.6,
+                reviews: 89,
+                badge: "Popular"
+              },
+              {
+                name: "Hoodie Matrix Code",
+                price: "$49.99",
+                originalPrice: "$59.99",
+                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop&crop=center",
+                category: "Hoodies",
+                rating: 4.9,
+                reviews: 203,
+                badge: "Oferta"
+              },
+              {
+                name: "Pantalones Cargo Tech",
+                price: "$39.99",
+                originalPrice: "$49.99",
+                image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop&crop=center",
+                category: "Pantalones",
+                rating: 4.7,
+                reviews: 156,
+                badge: "Nuevo"
+              },
+              {
+                name: "Camiseta Star Wars",
+                price: "$24.99",
+                originalPrice: "$29.99",
+                image: "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&h=400&fit=crop&crop=center",
+                category: "Camisetas",
+                rating: 4.8,
+                reviews: 312,
+                badge: "Popular"
+              },
+              {
+                name: "Gorra Zelda Master",
+                price: "$22.99",
+                originalPrice: "$27.99",
+                image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop&crop=center",
+                category: "Gorras",
+                rating: 4.5,
+                reviews: 78,
+                badge: "Nuevo"
+              },
+              {
+                name: "Hoodie Marvel Avengers",
+                price: "$54.99",
+                originalPrice: "$64.99",
+                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop&crop=center",
+                category: "Hoodies",
+                rating: 4.9,
+                reviews: 189,
+                badge: "Oferta"
+              },
+              {
+                name: "Pantalones Gaming",
+                price: "$44.99",
+                originalPrice: "$54.99",
+                image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop&crop=center",
+                category: "Pantalones",
+                rating: 4.6,
+                reviews: 134,
+                badge: "Popular"
+              }
+            ].map((product, index) => (
+              <Card
+                key={index}
+                className={`bg-[#2e2447] border-[#2e2447] overflow-hidden group cursor-pointer ${animationClasses.card(
+                  index,
+                  visibleCards.includes(index)
+                )} ${animationClasses.hover}`}
+                style={{
+                  transitionDelay: prefersReducedMotion ? "0ms" : `${index * 0.1}s`,
+                  willChange: prefersReducedMotion ? "auto" : "transform, box-shadow",
+                  contain: "layout style paint",
+                }}
+              >
+                <CardContent className="p-0">
+                  <div className="relative">
+                    <div className="relative h-64 overflow-hidden">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      {!prefersReducedMotion && (
+                        <div className="absolute inset-0 bg-[#7847eb]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      )}
+                    </div>
+                    
+                    {/* Badge */}
+                    <div className="absolute top-3 left-3">
+                      <span className={`px-2 py-1 text-xs font-bold rounded-full ${
+                        product.badge === "Nuevo" ? "bg-green-500 text-white" :
+                        product.badge === "Popular" ? "bg-[#7847eb] text-white" :
+                        "bg-orange-500 text-white"
+                      }`}>
+                        {product.badge}
+                      </span>
+                    </div>
+
+                    {/* Quick Add Button */}
+                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Button
+                        size="sm"
+                        className="bg-[#7847eb] hover:bg-[#7847eb]/90 text-white rounded-full w-8 h-8 p-0"
+                      >
+                        +
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="p-4">
+                    <div className="mb-2">
+                      <span className="text-xs text-[#a394c7] uppercase tracking-wide">
+                        {product.category}
+                      </span>
+                    </div>
+                    
+                    <h3
+                      className={`font-bold mb-2 text-sm ${
+                        prefersReducedMotion
+                          ? ""
+                          : "group-hover:text-[#7847eb] transition-colors duration-300"
+                      }`}
+                    >
+                      {product.name}
+                    </h3>
+
+                    {/* Rating */}
+                    <div className="flex items-center mb-2">
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <svg
+                            key={i}
+                            className={`w-3 h-3 ${
+                              i < Math.floor(product.rating) 
+                                ? "text-yellow-400" 
+                                : "text-gray-400"
+                            }`}
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                      </div>
+                      <span className="text-xs text-[#a394c7] ml-1">
+                        ({product.reviews})
+                      </span>
+                    </div>
+
+                    {/* Price */}
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-lg font-bold text-white">
+                          {product.price}
+                        </span>
+                        <span className="text-sm text-[#a394c7] line-through">
+                          {product.originalPrice}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Add to Cart Button */}
+                    <Button
+                      className={`w-full bg-[#7847eb] hover:bg-[#7847eb]/90 text-white ${
+                        prefersReducedMotion
+                          ? ""
+                          : isMobile
+                          ? "active:scale-95 transition-transform duration-150"
+                          : "transition-all duration-300 hover:scale-105"
+                      }`}
+                      style={{
+                        willChange: prefersReducedMotion ? "auto" : "transform",
+                      }}
+                    >
+                      Agregar al Carrito
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Predictive Trends Section */}
       <section className="px-6 py-16 bg-[#1a1a2e]" data-animate id="predictive-trends">
         <div className="max-w-7xl mx-auto">
